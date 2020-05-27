@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import StoreItem from "./StoreItem";
 
@@ -19,7 +19,7 @@ padding-bottom: 20px;
 `
 
 const Button = styled.button `
-padding: 15px 25px;
+padding: 5px 15px;
 font-size: 24px;
 cursor: pointer;
 text-align: center;
@@ -54,7 +54,6 @@ const checkMoneytoPrice = (money, price) => {
 
 
 const Upgrade = (cost, upgrade, multiplier, key) => {
-    console.log(cost)
     if (checkMoneytoPrice(props.score, cost)){
         props.setClick(props.click + upgrade)
         props.setScore(props.score - cost)
@@ -75,14 +74,14 @@ var storeItem = {
 var storeItem2 = {
     key: 1,
     name: "Clicker2", 
-    description:"Increases amount of clicks by 1", 
+    description:"Increases amount of clicks by 10", 
     upgrade: 10,
     cost:100, 
     multiplier:2,
     visible: true
 };
 
-const [test, setTest] = useState([storeItem, storeItem2]);
+const [test] = useState([storeItem, storeItem2]);
 
 
   return (
@@ -91,12 +90,12 @@ const [test, setTest] = useState([storeItem, storeItem2]);
         {test.map((item) => {
             if(item.visible === true){
             return (
-            <div key={item.key}>
+            <Item key={item.key}>
             <StoreItem 
             item={item} 
             upgrade={Upgrade} />
-            <button onClick={() => Upgrade(item.cost, item.upgrade, item.multiplier, item.key)}>Buy</button>
-            </div>
+            <Button onClick={() => Upgrade(item.cost, item.upgrade, item.multiplier, item.key)}>Buy</Button>
+            </Item>
             )}
         })}
     </Main>
