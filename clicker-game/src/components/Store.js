@@ -1,6 +1,22 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
+import StoreItem from "./StoreItem";
 
+const Main = styled.div `
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-content: center;
+padding: 30px;
+width: 30vw;
+background-color: #cbf5eb;
+`
+
+const Item = styled.div `
+display: flex;
+justify-content: space-around;
+padding-bottom: 20px;
+`
 
 const Button = styled.button `
 padding: 15px 25px;
@@ -27,7 +43,7 @@ box-shadow: 0 9px #999;
 `
 
 export default function Store(props) {
-const [cost, setCost] = useState(10);
+
 
 const checkMoneytoPrice = (money, price) => {
     if(money >= price){
@@ -37,17 +53,52 @@ const checkMoneytoPrice = (money, price) => {
 };
 
 
-const FirstUpgrade = () => {
+const Upgrade = (cost, upgrade, multiplier, key) => {
+    console.log(cost)
     if (checkMoneytoPrice(props.score, cost)){
-        props.setClick(props.click + 1)
+        props.setClick(props.click + upgrade)
         props.setScore(props.score - cost)
-        setCost(cost*2)
+        test[key].cost = cost*multiplier;
     }
 }
 
+var storeItem = {
+    key: 0,
+    name: "Clicker", 
+    description:"Increases clicks gained per click by 1", 
+    upgrade: 1,
+    cost:10, 
+    multiplier:2,
+    visible: true
+};
+
+var storeItem2 = {
+    key: 1,
+    name: "Clicker2", 
+    description:"Increases amount of clicks by 1", 
+    upgrade: 10,
+    cost:100, 
+    multiplier:2,
+    visible: true
+};
+
+const [test, setTest] = useState([storeItem, storeItem2]);
+
+
   return (
-    <div>
-        <Button onClick={() => FirstUpgrade()}>Increase click by 1. Cost:{cost}</Button>
-    </div>
+    <Main>
+        <h1>Store</h1>
+        {test.map((item) => {
+            if(item.visible === true){
+            return (
+            <div key={item.key}>
+            <StoreItem 
+            item={item} 
+            upgrade={Upgrade} />
+            <button onClick={() => Upgrade(item.cost, item.upgrade, item.multiplier, item.key)}>Buy</button>
+            </div>
+            )}
+        })}
+    </Main>
   );
 }

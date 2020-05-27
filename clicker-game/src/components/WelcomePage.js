@@ -9,6 +9,11 @@ justify-content: space-around;
 align-content: center;
 padding: 10vh;
 `
+
+const Score = styled.div `
+font-size: 36px;
+`
+
 const Button = styled.button `
 padding: 15px 25px;
 font-size: 24px;
@@ -42,7 +47,7 @@ const [click, setClick] = useState(1);
     <Main>
         <Store setScore={setScore} score={score} setClick={setClick} click={click}/>
         <Button onClick={() => setScore(score + click)}>Click Me</Button>
-        <div>{score}</div>
+        <Score>Clicks: {score}</Score>
     </Main>
   );
 }
