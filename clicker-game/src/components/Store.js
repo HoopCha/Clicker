@@ -7,7 +7,7 @@ display: flex;
 flex-direction: column;
 justify-content: space-around;
 align-content: center;
-padding: 30px;
+padding: 20px;
 width: 30vw;
 background-color: #cbf5eb;
 `
@@ -44,14 +44,12 @@ box-shadow: 0 9px #999;
 
 export default function Store(props) {
 
-
 const checkMoneytoPrice = (money, price) => {
     if(money >= price){
         return true
     }
     return false
 };
-
 
 const Upgrade = (cost, upgrade, multiplier, key) => {
     if (checkMoneytoPrice(props.score, cost)){
@@ -92,6 +90,7 @@ const [test] = useState([storeItem, storeItem2]);
             return (
             <Item key={item.key}>
             <StoreItem 
+            score ={props.score}
             item={item} 
             upgrade={Upgrade} />
             <Button onClick={() => Upgrade(item.cost, item.upgrade, item.multiplier, item.key)}>Buy</Button>
