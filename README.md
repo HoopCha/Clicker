@@ -1,1 +1,1 @@
-# Clicker test
+# Clicker test, this will be a clicker game made in react
